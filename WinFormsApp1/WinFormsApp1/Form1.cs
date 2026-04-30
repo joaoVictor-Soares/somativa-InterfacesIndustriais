@@ -1,6 +1,7 @@
 using MQTTnet;
 using MQTTnet.Client;
 using Newtonsoft.Json;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Reflection;
 using System.Text;
 
@@ -13,6 +14,7 @@ namespace WinFormsApp1
         private bool listaAlarme = false;
         private bool manual = false;
         private bool conectar = false;
+        private int pointTemperatura =  1;
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +44,8 @@ namespace WinFormsApp1
                     {
                         lblTemperatura.Text = dados.temperatura.ToString();
                         barTemperatura.Value = dados.temperatura;
+                        graficoTemperatura(dados.temperatura);
+                        pointTemperatura++;
 
                         lblUmidade.Text = dados.umidade.ToString();
                         barUmidade.Value = dados.umidade;
@@ -153,6 +157,11 @@ namespace WinFormsApp1
         private void lstAlarme_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void graficoTemperatura(int temperatura)
+        {
+            chart1.Series["Series1"].Points.AddXY(pointTemperatura, temperatura);
         }
     }
 }

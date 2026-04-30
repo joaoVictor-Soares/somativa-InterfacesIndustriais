@@ -1,0 +1,5 @@
+Vá em Ferramentas -> Gerenciador de Pacotes NuGet -> Gerenciar Pacotes NuGet para a Solução.
+
+Clique na aba Procurar e digite: WinForms.DataVisualization (por Kirsan)
+
+Instale a dependência
