@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Reflection;
 using System.Text;
+using System.Collections;
+using System.Runtime.Intrinsics.X86;
 
 namespace WinFormsApp1
 {
@@ -14,7 +16,10 @@ namespace WinFormsApp1
         private bool listaAlarme = false;
         private bool manual = false;
         private bool conectar = false;
-        private int pointTemperatura =  1;
+        private bool relatorio = false;
+        private ArrayList arrayDados = new ArrayList();
+        private int pointGrafico = 1;
+
         public Form1()
         {
             InitializeComponent();
@@ -43,26 +48,29 @@ namespace WinFormsApp1
                     Invoke((System.Windows.Forms.MethodInvoker)delegate
                     {
                         lblTemperatura.Text = dados.temperatura.ToString();
-                        barTemperatura.Value = dados.temperatura;
-                        graficoTemperatura(dados.temperatura);
-                        pointTemperatura++;
+                        verticalBarTemperatura.Value = dados.temperatura;
 
                         lblUmidade.Text = dados.umidade.ToString();
-                        barUmidade.Value = dados.umidade;
+                        verticalBarUmidade.Value = dados.umidade;
 
                         lblPressao.Text = dados.pressao.ToString();
-                        barPressao.Value = (int)dados.pressao;
+                        verticalBarPressao.Value = (int)dados.pressao;
 
                         lblVibracao.Text = dados.vibracao.ToString();
-                        barVibracao.Value = (int)dados.vibracao;
+                        verticalBarVibracao.Value = (int)dados.vibracao;
 
                         lblNivel.Text = dados.nivel.ToString();
-                        barNivel.Value = dados.nivel;
+                        verticalBarNivel.Value = dados.nivel;
+
+                        DateTime data = DateTime.Now;
+                        string relatorioDados = data + "| Temperatura: " + dados.temperatura + " | Umidade: " + dados.umidade + " | Pressão: " + dados.pressao + " | Nível: " + dados.nivel + " | Vibração: " + dados.vibracao;
+
+                        arrayDados.Add(relatorioDados);
+
 
                         if (dados.temperatura >= 75)
                         {
                             lblAlarmeTemperatura.Visible = true;
-                            DateTime data = DateTime.Now;
                             string alarme = data + "| temperatura: " + dados.temperatura;
                             lstAlarme.Items.Add(alarme);
                         }
@@ -70,10 +78,12 @@ namespace WinFormsApp1
                         if (dados.vibracao >= 18)
                         {
                             lblAlarmeVibracao.Visible = true;
-                            DateTime data = DateTime.Now;
                             string alarme = data + "| vibracao: " + dados.vibracao;
                             lstAlarme.Items.Add(alarme);
                         }
+
+                        plotGraficos(dados.temperatura, dados.umidade, dados.pressao, dados.vibracao, dados.nivel);
+                        pointGrafico++;
                     });
 
                     return System.Threading.Tasks.Task.CompletedTask;
@@ -100,22 +110,6 @@ namespace WinFormsApp1
 
         }
 
-        private void btnAlarmes_Click(object sender, EventArgs e)
-        {
-            listaAlarme = !listaAlarme;
-
-            if (listaAlarme)
-            {
-                lstAlarme.Visible = true;
-                btnAlarmes.Text = "ESCONDER LISTA";
-            }
-            else
-            {
-                lstAlarme.Visible = false;
-                btnAlarmes.Text = "ALARMES";
-            }
-        }
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             lblAlarmeVibracao.Visible = false;
@@ -132,7 +126,7 @@ namespace WinFormsApp1
                 txtBroker.Enabled = false;
                 txtPorta.Enabled = false;
                 txtTopico.Enabled = false;
-                btnAlarmes.Enabled = false;
+                btnRelatorio.Enabled = false;
                 btnReset.Enabled = false;
                 btnConectar.Enabled = false;
             }
@@ -142,7 +136,7 @@ namespace WinFormsApp1
                 txtBroker.Enabled = true;
                 txtPorta.Enabled = true;
                 txtTopico.Enabled = true;
-                btnAlarmes.Enabled = true;
+                btnRelatorio.Enabled = true;
                 btnReset.Enabled = true;
                 btnConectar.Enabled = true;
             }
@@ -159,9 +153,50 @@ namespace WinFormsApp1
 
         }
 
-        private void graficoTemperatura(int temperatura)
+        private void plotGraficos(int temperatura, int umidade, float pressao, float vibracao, int nivel)
         {
-            chart1.Series["Series1"].Points.AddXY(pointTemperatura, temperatura);
+            chartTemperatura.Series["Series1"].Points.AddXY(pointGrafico, temperatura);
+            chartUmidade.Series["Series1"].Points.AddXY(pointGrafico, umidade);
+            chartPressao.Series["Series1"].Points.AddXY(pointGrafico, pressao);
+            chartVibracao.Series["Series1"].Points.AddXY(pointGrafico, vibracao);
+            chartNivel.Series["Series1"].Points.AddXY(pointGrafico, nivel);
+        }
+
+        private void lblVibracao_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRelatorio_Click(object sender, EventArgs e)
+        {
+            DateTime data = DateTime.Now;
+
+            string caminho = $"{data:yyyy-MM-dd}_relatorio.txt";
+            string conteudo = "";
+
+            if (!File.Exists(caminho))
+            {
+                    File.WriteAllText(caminho, conteudo);
+            }
+            foreach (string dados in arrayDados)
+            {
+                File.AppendAllText(caminho, dados + Environment.NewLine);
+            }
+            btnRelatorio.Text = "RELATÓRIO GERADO";
+            btnRelatorio.Enabled = false;
+
+        }
+    }
+    public class VerticalProgressBar : ProgressBar
+    {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.Style |= 0x04; // Adiciona o estilo PBS_VERTICAL
+                return cp;
+            }
         }
     }
 }
@@ -174,4 +209,6 @@ public class DadosMqtt
     public int nivel { get; set; }
     public float vibracao { get; set; }
 }
+
+
 
