@@ -3,7 +3,7 @@ import json
 import random
 import time
 
-broker = "localhost"
+broker = "10.110.18.11"
 porta = 1883
 topico = "industriais/sensores/4471"
 

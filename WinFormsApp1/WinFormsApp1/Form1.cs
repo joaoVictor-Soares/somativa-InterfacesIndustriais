@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Collections;
 using System.Runtime.Intrinsics.X86;
+using System.Diagnostics;
 
 namespace WinFormsApp1
 {
@@ -176,7 +177,7 @@ namespace WinFormsApp1
 
             if (!File.Exists(caminho))
             {
-                    File.WriteAllText(caminho, conteudo);
+                File.WriteAllText(caminho, conteudo);
             }
             foreach (string dados in arrayDados)
             {
@@ -186,6 +187,18 @@ namespace WinFormsApp1
             btnRelatorio.Enabled = false;
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string caminho = @"https://www.google.com";
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = caminho,
+                UseShellExecute = true 
+            };
+
+            Process.Start(psi);
+        }
     }
     public class VerticalProgressBar : ProgressBar
     {
@@ -194,7 +207,7 @@ namespace WinFormsApp1
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.Style |= 0x04; // Adiciona o estilo PBS_VERTICAL
+                cp.Style |= 0x04;
                 return cp;
             }
         }
