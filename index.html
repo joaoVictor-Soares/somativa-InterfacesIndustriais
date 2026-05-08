@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisas - Automação Industrial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+
+    section {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #003366;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      color: #0055aa;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #003366;
+      color: white;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pesquisas sobre Automação Industrial</h1>
+    <p>Sistemas Supervisórios, MQTT, Alarmes, ISA-101, Modos de Operação e UX</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Pesquisa 1 – Arquitetura Supervisória</h2>
+
+      <h3>O que é um sistema supervisório?</h3>
+      <p>
+        Um sistema supervisório, também chamado de SCADA (Supervisory Control and Data Acquisition),
+        é um software utilizado para monitorar, controlar e adquirir dados de processos industriais em tempo real.
+        Ele coleta informações de sensores, CLPs e máquinas industriais.
+      </p>
+
+      <h3>Qual a função de um servidor de dados?</h3>
+      <p>
+        O servidor de dados é responsável por receber, armazenar, processar e distribuir as informações
+        coletadas dos equipamentos industriais para os demais componentes do sistema supervisório.
+      </p>
+
+      <h3>O que são clientes (viewers)?</h3>
+      <p>
+        Clientes ou viewers são interfaces utilizadas pelos usuários para visualizar dados em tempo real,
+        gráficos, alarmes e telas do processo industrial.
+      </p>
+    </section>
+
+    <section>
+      <h2>Pesquisa 2 – MQTT</h2>
+
+      <h3>O que é MQTT?</h3>
+      <p>
+        MQTT (Message Queuing Telemetry Transport) é um protocolo de comunicação leve utilizado em IoT
+        e automação industrial para troca de mensagens entre dispositivos.
+      </p>
+
+      <h3>O que é broker?</h3>
+      <p>
+        O broker é o servidor responsável por gerenciar toda a comunicação no MQTT,
+        recebendo e distribuindo mensagens.
+      </p>
+
+      <h3>O que são tópicos?</h3>
+      <p>
+        Tópicos são canais de comunicação utilizados para organizar as mensagens no MQTT.
+      </p>
+
+      <h3>Diferença entre publisher e subscriber</h3>
+
+      <table>
+        <tr>
+          <th>Publisher</th>
+          <th>Subscriber</th>
+        </tr>
+        <tr>
+          <td>Publica ou envia mensagens</td>
+          <td>Recebe mensagens</td>
+        </tr>
+        <tr>
+          <td>Envia dados ao broker</td>
+          <td>Se inscreve nos tópicos</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Pesquisa 3 – Alarmes Industriais</h2>
+
+      <h3>O que são alarmes em sistemas industriais?</h3>
+      <p>
+        Alarmes industriais são mecanismos utilizados para alertar operadores sobre situações anormais
+        ou perigosas em processos industriais.
+      </p>
+
+      <h3>Importância de alarmes bem configurados</h3>
+      <ul>
+        <li>Maior segurança operacional;</li>
+        <li>Redução de falhas e acidentes;</li>
+        <li>Melhor tomada de decisão;</li>
+        <li>Evita excesso de alarmes desnecessários.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Pesquisa 4 – Norma ISA-101</h2>
+
+      <h3>O que é a norma ISA-101?</h3>
+      <p>
+        A norma ISA-101 define boas práticas para o desenvolvimento de IHMs utilizadas em sistemas industriais,
+        buscando melhorar clareza, segurança e eficiência.
+      </p>
+
+      <h3>O que é IHM de alta performance?</h3>
+      <p>
+        Uma IHM de alta performance é uma interface projetada para facilitar a identificação rápida de problemas,
+        utilizando layout simples e organizado.
+      </p>
+
+      <ul>
+        <li>Uso reduzido de cores;</li>
+        <li>Destaque para alarmes importantes;</li>
+        <li>Melhor leitura das informações;</li>
+        <li>Maior eficiência operacional.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Pesquisa 5 – Modos de Operação</h2>
+
+      <h3>Diferença entre modo manual e automático</h3>
+
+      <table>
+        <tr>
+          <th>Modo Manual</th>
+          <th>Modo Automático</th>
+        </tr>
+        <tr>
+          <td>Controle feito pelo operador</td>
+          <td>Controle feito pelo sistema</td>
+        </tr>
+        <tr>
+          <td>Mais utilizado em manutenção</td>
+          <td>Mais utilizado na produção</td>
+        </tr>
+        <tr>
+          <td>Maior possibilidade de erro humano</td>
+          <td>Maior precisão e produtividade</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Pesquisa 6 – UX em Sistemas Industriais</h2>
+
+      <h3>O que é UX?</h3>
+      <p>
+        UX (User Experience) significa experiência do usuário e representa como uma pessoa interage
+        com um sistema de forma simples, intuitiva e eficiente.
+      </p>
+
+      <h3>Por que é importante em supervisórios?</h3>
+      <ul>
+        <li>Facilita a visualização das informações;</li>
+        <li>Reduz erros humanos;</li>
+        <li>Melhora a identificação de falhas;</li>
+        <li>Aumenta a segurança e produtividade.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p> Pesquisa Automação Industrial - Alice Prado e Silva e João Victor da Silva Neves Soares</p>
+  </footer>
+
+</body>
+</html>
