@@ -190,14 +190,24 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string caminho = @"https://www.google.com";
-            ProcessStartInfo psi = new ProcessStartInfo
-            {
-                FileName = caminho,
-                UseShellExecute = true 
-            };
+            string pastaExecutavel = AppDomain.CurrentDomain.BaseDirectory;
 
-            Process.Start(psi);
+            string pastaRaizProjeto = Path.GetFullPath(Path.Combine(pastaExecutavel, @"..\..\..\..\..\"));
+
+            string caminhoHtml = Path.Combine(pastaRaizProjeto, "index.html");
+
+            if (File.Exists(caminhoHtml))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = caminhoHtml,
+                    UseShellExecute = true
+                });
+            }
+            else
+            {
+                MessageBox.Show("Arquivo não encontrado em: " + caminhoHtml);
+            }
         }
     }
     public class VerticalProgressBar : ProgressBar
